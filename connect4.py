@@ -70,4 +70,4 @@ while run:
 
 
 ####### Test ########
-print("Out off loop")
+print("Out of loop")

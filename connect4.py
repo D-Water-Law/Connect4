@@ -25,15 +25,17 @@ def dropD(board,user,col):
         else:
             row -= 1
         
-    return board
+    return board, board[row][col] == "."
 
-def checkland(board):
+def checkall(board,last_d):
+    
+    # checks for horizontal win
     countY = 0
     countR = 0
     
     for row in board:
         if countY == 4 or countR == 4:
-            return 1
+            win_hor = 1
             break
         else:
             countY = 0
@@ -46,19 +48,20 @@ def checkland(board):
                 if col == "R":
                     countR += 1
                     countY = 0
-                
-    return 0
+
+    if countY == 4 or countR == 4:
+        win_hor = 1
     
 
+    # checks for vertical win
 
-            
-            
-            
 
+      
+ 
 
     
 
-
+############### Main Game ################
 myBoard = [[".",".",".",".",".","."],[".",".",".",".",".","."],[".",".",".",".",".","."],[".",".",".",".",".","."],[".",".",".",".",".","."],["Y","Y","Y",".",".","."]]
 run = True
 player = 1
@@ -73,11 +76,11 @@ while run:
     showBoard(myBoard)
     col = int(input("Drop a disk\n"))
     
-    myBoard = dropD(myBoard,player,col)
+    myBoard, last_col = dropD(myBoard,player,col)
 
     showBoard(myBoard)
 
-    scores[player-1] += checkland(myBoard)
+    scores[player-1] += checkall(myBoard,col)
 
 
     if player == 1:

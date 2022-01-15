@@ -25,10 +25,18 @@ def dropD(board,user,col):
         else:
             row -= 1
         
-    return board, board[row][col] == "."
+    return board, [row, col]
 
 def checkall(board,last_d):
-    
+
+    #last_d [0] = row of the last disc dropped
+    #last_d[1] = collumn of the last disc dropped
+    last_dr = last_d[0]
+    last_dc = last_d[1]
+
+    disc = board[last_dr][last_dc]
+    # disc = last disc letter
+
     # checks for horizontal win
     countY = 0
     countR = 0
@@ -50,11 +58,31 @@ def checkall(board,last_d):
                     countY = 0
 
     if countY == 4 or countR == 4:
-        win_hor = 1
+        return 1
     
 
     # checks for vertical win
+    count = 0
+    row = last_dr
 
+    while last_dr <= 2 and count != 4:
+        if board[row][last_dc] == disc:
+            count += 1
+        
+        else:
+            row += 1
+
+        if count == 4:
+            print("Vertical win")
+            return 1
+
+    return 0
+            
+    
+            
+
+
+            
 
       
  
@@ -62,12 +90,12 @@ def checkall(board,last_d):
     
 
 ############### Main Game ################
-myBoard = [[".",".",".",".",".","."],[".",".",".",".",".","."],[".",".",".",".",".","."],[".",".",".",".",".","."],[".",".",".",".",".","."],["Y","Y","Y",".",".","."]]
+myBoard = [[".",".",".",".",".","."],[".",".",".",".",".","."],[".",".",".",".",".","."],["Y",".",".",".",".","."],["Y",".",".",".",".","."],["Y",".",".",".",".","."]]
 run = True
 player = 1
 scores = [0,0]
 
-print("Player 1 is Y\n Player 2 is R")
+print("Player 1 is Y\nPlayer 2 is R\n")
 
 while run:
     showScore(scores)
@@ -76,11 +104,10 @@ while run:
     showBoard(myBoard)
     col = int(input("Drop a disk\n"))
     
-    myBoard, last_col = dropD(myBoard,player,col)
+    myBoard, last_dc = dropD(myBoard,player,col)
 
-    showBoard(myBoard)
-
-    scores[player-1] += checkall(myBoard,col)
+    scores[player-1] += checkall(myBoard,last_dc)
+    
 
 
     if player == 1:

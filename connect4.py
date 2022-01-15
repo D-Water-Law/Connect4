@@ -5,6 +5,14 @@ def showBoard (board):
         num += 1
         print(str(num)+"|"+" ".join(row)+"|")
 
+def resetBoard ():
+    return  [[".",".",".",".",".","."],
+             [".",".",".",".",".","."],
+             [".",".",".",".",".","."],
+             [".",".",".",".",".","."],
+             [".",".",".",".",".","."],
+             [".",".",".",".",".","."]]
+
 def showScore (points):
     print("Player 1:",points[0])
     print("Player 2:",points[1])
@@ -58,23 +66,31 @@ def checkall(board,last_d):
                     countY = 0
 
     if countY == 4 or countR == 4:
+        print("Horizontal win !!!")
         return 1
+        
     
 
     # checks for vertical win
     count = 0
+    
     row = last_dr
 
-    while last_dr <= 2 and count != 4:
-        if board[row][last_dc] == disc:
-            count += 1
-        
-        else:
+    if last_dr <= 2:
+        for i in range(4):
+            if board[row][last_dc] == disc:
+                count += 1
+            
             row += 1
+        
 
         if count == 4:
-            print("Vertical win")
+            print("Vertical win !!")
             return 1
+
+    ################## TO DO ##################### check horizontal win
+            
+                
 
     return 0
             
@@ -95,7 +111,7 @@ run = True
 player = 1
 scores = [0,0]
 
-print("Player 1 is Y\nPlayer 2 is R\n")
+print("Player 1 is Y\nPlayer 2 is R")
 
 while run:
     showScore(scores)
@@ -106,9 +122,18 @@ while run:
     
     myBoard, last_dc = dropD(myBoard,player,col)
 
-    scores[player-1] += checkall(myBoard,last_dc)
+    if checkall(myBoard,last_dc) == 1:
+        showBoard(myBoard)
+        choice = int(input("Do you want to play again?\n1.Yes\n2.No\n"))
+        if choice == 2:
+            run = False
+            scores[player-1] += 1
+        else:
+            scores[player-1] += 1
+            myBoard = resetBoard()
+        
     
-
+    
 
     if player == 1:
         player += 1
@@ -119,7 +144,8 @@ while run:
     
 
 
-####### Test ########
-print("Out of loop")
+####### Out of loop ########
+print("Game Over")
+print("Player 1 scored",scores[0])
+print("Player 2 scored",scores[1])
 
-## just a git test ##

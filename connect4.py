@@ -91,7 +91,7 @@ def checkall(board,last_d):
     ################## TO DO ##################### check positive horizontal win
             
     if last_dr <= 2:
-        count = 0  
+        count = 1  
         pos = 1
         
         while count != 4 and last_dr - pos > -1 and last_dc + pos < 6:

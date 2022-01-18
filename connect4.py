@@ -114,7 +114,32 @@ def checkall(board,last_d):
             print("Diagonal win")
             return 1
                 
-            
+
+        ############# check for negative diagonal ###################
+
+        count = 1  
+        pos = 1
+        
+        while count != 4 and last_dr - pos > -1 and last_dc - pos > -1:
+            if board[last_dr - pos][last_dc - pos] == disc:
+                count += 1
+                pos += 1
+            else:
+                break
+        
+        pos = 1
+
+        while count != 4 and last_dr + pos < 6 and last_dc + pos < 6:
+            if board[last_dr + pos][last_dc + pos] == disc:
+                count += 1
+                pos += 1
+            else:
+                break
+
+        if count == 4:
+            print("Diagonal win")
+            return 1
+
             
 
 
@@ -129,9 +154,9 @@ def checkall(board,last_d):
 myBoard = [[".",".",".",".",".","."]
           ,[".",".",".",".",".","."],
            [".",".",".",".",".","."],
-           [".",".","Y","R",".","."],
-           [".","Y",".","R",".","."],
-           ["Y",".",".","R",".","."]]
+           ["R","Y",".",".",".","."],
+           ["Y",".","Y",".",".","."],
+           ["Y",".",".","Y",".","."]]
 run = True
 player = 1
 scores = [0,0]

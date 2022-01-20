@@ -12,4 +12,4 @@ while True: # main game loop
             quit()
     pygame.display.update()
 
-    activeKey = pygame.
+    activeKey = pygame.key.get_pressed()

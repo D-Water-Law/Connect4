@@ -9,58 +9,54 @@ class Board:
             [".", ".", ".", ".", ".", "."]
         ]
 
-    def showBoard(self, board):
+    def showBoard(self):
         print("  0 1 2 3 4 5")
         num = -1
-        for row in board:
+        for row in self.board:
             num += 1
             print(str(num)+"|"+" ".join(row)+"|")
 
     def resetBoard(self):
-        return [[".", ".", ".", ".", ".", "."],
-                [".", ".", ".", ".", ".", "."],
-                [".", ".", ".", ".", ".", "."],
-                [".", ".", ".", ".", ".", "."],
-                [".", ".", ".", ".", ".", "."],
-                [".", ".", ".", ".", ".", "."]]
+        self.board = [[".", ".", ".", ".", ".", "."],
+                      [".", ".", ".", ".", ".", "."],
+                      [".", ".", ".", ".", ".", "."],
+                      [".", ".", ".", ".", ".", "."],
+                      [".", ".", ".", ".", ".", "."],
+                      [".", ".", ".", ".", ".", "."]]
 
-    def showScore(self, points):
-        print("Player 1:", points[0])
-        print("Player 2:", points[1])
-
-    def dropD(self, board, user, col):
+    def dropD(self, user, col):
         row = 5
         check = True
-        while board[0][col] != ".":
+        while self.board[0][col] != ".":
             col = int(input("Collumn full !! Select another collumn\n"))
 
         while check:
-            if board[row][col] == ".":
+            if self.board[row][col] == ".":
                 if user == 1:
-                    board[row][col] = "Y"
+                    self.board[row][col] = "Y"
                 else:
-                    board[row][col] = "R"
+                    self.board[row][col] = "R"
                 check = False
             else:
                 row -= 1
 
-        return board, [row, col]
+        return [row, col]
 
-    def checkall(self, board, last_d):
+    def checkall(self, last_d):
 
         # last_d [0] = row of the last disc dropped
         # last_d[1] = collumn of the last disc dropped
         last_dr = last_d[0]
         last_dc = last_d[1]
 
-        disc = board[last_dr][last_dc]
+        disc = self.board[last_dr][last_dc]
         # disc = last disc letter
 
         # checks for horizontal win
         countY = 0
         countR = 0
 
-        for row in board:
+        for row in self.board:
             if countY == 4 or countR == 4:
                 win_hor = 1
                 break
@@ -87,7 +83,7 @@ class Board:
 
         if last_dr <= 2:
             for i in range(4):
-                if board[row][last_dc] == disc:
+                if self.board[row][last_dc] == disc:
                     count += 1
 
                 row += 1
@@ -96,14 +92,14 @@ class Board:
                 print("Vertical win !!")
                 return 1
 
-        # TO DO ##################### check positive horizontal win
+        ##################### check positive horizontal win
 
         if last_dr <= 2:
             count = 1
             pos = 1
 
             while count != 4 and last_dr - pos > -1 and last_dc + pos < 6:
-                if board[last_dr - pos][last_dc + pos] == disc:
+                if self.board[last_dr - pos][last_dc + pos] == disc:
                     count += 1
                     pos += 1
                 else:
@@ -112,7 +108,7 @@ class Board:
             pos = 1
 
             while count != 4 and last_dr + pos < 6 and last_dc - pos > -1:
-                if board[last_dr + pos][last_dc - pos] == disc:
+                if self.board[last_dr + pos][last_dc - pos] == disc:
                     count += 1
                     pos += 1
                 else:
@@ -128,7 +124,7 @@ class Board:
             pos = 1
 
             while count != 4 and last_dr - pos > -1 and last_dc - pos > -1:
-                if board[last_dr - pos][last_dc - pos] == disc:
+                if self.board[last_dr - pos][last_dc - pos] == disc:
                     count += 1
                     pos += 1
                 else:
@@ -137,7 +133,7 @@ class Board:
             pos = 1
 
             while count != 4 and last_dr + pos < 6 and last_dc + pos < 6:
-                if board[last_dr + pos][last_dc + pos] == disc:
+                if self.board[last_dr + pos][last_dc + pos] == disc:
                     count += 1
                     pos += 1
                 else:
@@ -148,6 +144,11 @@ class Board:
                 return 1
 
         return 0
+
+
+def showScore(points):
+    print("Player 1:", points[0])
+    print("Player 2:", points[1])
 
 
 ############### Main Game ################
@@ -163,20 +164,21 @@ while run:
     showScore(scores)
 
     print("##########  Player", player, "Turn  ############")
-    showBoard(myBoard)
+    myBoard.showBoard()
     col = int(input("Drop a disk\n"))
 
-    myBoard, last_dc = dropD(myBoard, player, col)
+    last_dc = myBoard.dropD(player, col)
 
-    if checkall(myBoard, last_dc) == 1:
-        showBoard(myBoard)
+    myBoard.showBoard()
+
+    if myBoard.checkall(last_dc) == 1:
         choice = int(input("Do you want to play again?\n1.Yes\n2.No\n"))
         if choice == 2:
             run = False
             scores[player-1] += 1
         else:
             scores[player-1] += 1
-            myBoard = resetBoard()
+            myBoard.resetBoard()
 
     if player == 1:
         player += 1

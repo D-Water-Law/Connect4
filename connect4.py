@@ -188,3 +188,5 @@ while run:
 print("Game Over")
 print("Player 1 scored", scores[0])
 print("Player 2 scored", scores[1])
+
+# test from personal computer

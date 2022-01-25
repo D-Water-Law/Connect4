@@ -9,6 +9,9 @@ class Board:
             [".", ".", ".", ".", ".", "."]
         ]
 
+    def getBoard(self):
+        return self.board
+        
     def showBoard(self):
         print("  0 1 2 3 4 5")
         num = -1
@@ -152,43 +155,42 @@ def showScore(points):
 
 
 ############### Main Game ################
-myBoard = Board()
+# myBoard = Board()
 
-run = True
-player = 1
-scores = [0, 0]
+# run = True
+# player = 1
+# scores = [0, 0]
 
-print("Player 1 is Y\nPlayer 2 is R")
+# print("Player 1 is Y\nPlayer 2 is R")
 
-while run:
-    showScore(scores)
+# while run:
+#     showScore(scores)
 
-    print("##########  Player", player, "Turn  ############")
-    myBoard.showBoard()
-    col = int(input("Drop a disk\n"))
+#     print("##########  Player", player, "Turn  ############")
+#     myBoard.showBoard()
+#     col = int(input("Drop a disk\n"))
 
-    last_dc = myBoard.dropD(player, col)
+#     last_dc = myBoard.dropD(player, col)
 
-    myBoard.showBoard()
+#     myBoard.showBoard()
 
-    if myBoard.checkall(last_dc) == 1:
-        choice = int(input("Do you want to play again?\n1.Yes\n2.No\n"))
-        if choice == 2:
-            run = False
-            scores[player-1] += 1
-        else:
-            scores[player-1] += 1
-            myBoard.resetBoard()
+#     if myBoard.checkall(last_dc) == 1:
+#         choice = int(input("Do you want to play again?\n1.Yes\n2.No\n"))
+#         if choice == 2:
+#             run = False
+#             scores[player-1] += 1
+#         else:
+#             scores[player-1] += 1
+#             myBoard.resetBoard()
 
-    if player == 1:
-        player += 1
-    else:
-        player -= 1
+#     if player == 1:
+#         player += 1
+#     else:
+#         player -= 1
 
 
-####### Out of loop ########
-print("Game Over")
-print("Player 1 scored", scores[0])
-print("Player 2 scored", scores[1])
+# ####### Out of loop ########
+# print("Game Over")
+# showScore(scores)
 
-# test from personal computer
+# # test from personal computer

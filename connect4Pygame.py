@@ -1,15 +1,37 @@
 import pygame
+from connect4 import Board
+
+def genBoard(surface,sLength,sHeight):
+    pass
+    # board = Board.getBoard()
+    # for row in range(len(board)):
+    #     for col in row
+        
 
 
 pygame.init()
-DISPLAYSURF = pygame.display.set_mode((400, 300))
-pygame.display.set_caption('Hello World!')
+win_height = 700
+win_width = 800 
+DISPLAYSURF = pygame.display.set_mode((win_width, win_height))
+pygame.display.set_caption('Connect 4')
 
-while True: # main game loop
+run = True
+
+genBoard(DISPLAYSURF)
+
+while run: # main game loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
-    pygame.display.update()
+            run = False
 
+    
     activeKey = pygame.key.get_pressed()
+    
+    if activeKey[pygame.K_ESCAPE]:
+        run = False    
+    
+    
+    pygame.display.update()  
+    
+
+pygame.quit()

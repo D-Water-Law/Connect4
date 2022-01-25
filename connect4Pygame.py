@@ -1,11 +1,12 @@
 import pygame
 from connect4 import Board
 
-def genBoard(surface,sLength,sHeight):
+def genBoard(surface,sWidth,sHeight):
     pass
-    # board = Board.getBoard()
-    # for row in range(len(board)):
-    #     for col in row
+    board = Board.getBoard()
+    for row in board:
+        for col in range(len(row)):
+            pygame.draw.rect(surface,(0,0,255),(sWidth/board,sWidth))#############
         
 
 

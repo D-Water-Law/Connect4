@@ -1,5 +1,7 @@
 import pygame
+import math
 from connect4 import Board
+
 
 def genBoard(surface,board):
     rowCount = len(board)
@@ -48,18 +50,31 @@ while run: # main game loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if pygame.mouse.get_pressed() == (1,0,0):
+                print("right click")
+                ## continue from here
+
+
     
-    genBoard(DISPLAYSURF,myBoard.getBoard())
     
+    activeKey = pygame.key.get_pressed()
+    if activeKey[pygame.K_ESCAPE]:
+        run = False 
+    ## put this in event handler section##
+
     mousex, mousey = pygame.mouse.get_pos()
     drawTopC(DISPLAYSURF,mousex)
 
-
-    activeKey = pygame.key.get_pressed()
+    genBoard(DISPLAYSURF,myBoard.getBoard())
     
-    if activeKey[pygame.K_ESCAPE]:
-        run = False 
-    if activeKey[]
+
+
+
+    
+    
+    
+
     
     
     pygame.display.update()  

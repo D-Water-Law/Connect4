@@ -52,13 +52,14 @@ while run: # main game loop
     genBoard(DISPLAYSURF,myBoard.getBoard())
     
     mousex, mousey = pygame.mouse.get_pos()
-
     drawTopC(DISPLAYSURF,mousex)
+
 
     activeKey = pygame.key.get_pressed()
     
     if activeKey[pygame.K_ESCAPE]:
-        run = False    
+        run = False 
+    if activeKey[]
     
     
     pygame.display.update()  

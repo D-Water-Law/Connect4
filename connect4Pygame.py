@@ -19,13 +19,13 @@ def genBoard(surface,board):
 def drawTopC(surface,x):
     pygame.draw.circle(surface,RED,(x,50),40)
 
-def switchP(player):
-    if player == 1:
-        player += 1
+def switchP(p):
+    if p == 1:
+        p += 1
     else:
-        player -= 1
+        p -= 1
     
-    return player
+    return p
         
 ########### Colours ##############
 
@@ -44,16 +44,26 @@ pygame.display.set_caption('Connect 4')
 run = True
 
 myBoard = Board()
-
+player = 1
 
 while run: # main game loop
+    mousex, mousey = pygame.mouse.get_pos()
+    drawTopC(DISPLAYSURF,mousex)    
+    
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         if event.type == pygame.MOUSEBUTTONDOWN:
+            myBoard.showBoard()
             if pygame.mouse.get_pressed() == (1,0,0):
                 print("right click")
                 ## continue from here
+
+                last_dc = myBoard.dropD(player, math.trunc(mousex/100))
+                myBoard.showBoard()
+                player = switchP(player)
+
 
 
     
@@ -63,8 +73,7 @@ while run: # main game loop
         run = False 
     ## put this in event handler section##
 
-    mousex, mousey = pygame.mouse.get_pos()
-    drawTopC(DISPLAYSURF,mousex)
+
 
     genBoard(DISPLAYSURF,myBoard.getBoard())
     

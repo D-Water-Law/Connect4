@@ -170,7 +170,7 @@ def showScore(points):
 #     myBoard.showBoard()
 #     col = int(input("Drop a disk\n"))
 
-#     last_dc = myBoard.dropD(player, col)
+#     
 
 #     myBoard.showBoard()
 

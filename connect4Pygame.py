@@ -111,6 +111,8 @@ pygame.quit()
 
 
 
+####### Connect 4 game is now complete Now need to do few tests ########
+
 
 ################# Stuff ###############
     # activeKey = pygame.key.get_pressed()

@@ -13,9 +13,18 @@ def genBoard(surface,board):
     squareSize = 100
     for row in range(rowCount):
         for col in range(colCount):
-            
+
             pygame.draw.rect(surface,BLUE,(col*squareSize,row*squareSize+squareSize,squareSize,squareSize))
-            pygame.draw.circle(surface,BLACK,(col*squareSize+(squareSize/2),row*squareSize+squareSize+(squareSize/2)),40)
+
+            
+            if board[row][col] == "Y":
+                color = YELLOW
+            elif board[row][col] == "R":
+                color = RED
+            else:
+                color = BLACK
+            
+            pygame.draw.circle(surface,color,(col*squareSize+(squareSize/2),row*squareSize+squareSize+(squareSize/2)),40)
 
 def drawTopC(surface,x,user):
     if user == 1:
@@ -68,10 +77,10 @@ while run: # main game loop
 
                 if myBoard.checkTopCol(math.trunc(mousex/100)):
                     last_dc = myBoard.dropD(player, math.trunc(mousex/100))
-                
+                    player = switchP(player)
                     
                 myBoard.showBoard()
-                player = switchP(player)
+                
                 
 
 

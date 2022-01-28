@@ -58,11 +58,12 @@ while run: # main game loop
             myBoard.showBoard()
             if pygame.mouse.get_pressed() == (1,0,0):
                 print("right click")
-                ## continue from here
+                
 
                 last_dc = myBoard.dropD(player, math.trunc(mousex/100))
                 myBoard.showBoard()
                 player = switchP(player)
+                ## continue from here
 
 
 

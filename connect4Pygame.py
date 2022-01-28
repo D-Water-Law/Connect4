@@ -72,13 +72,18 @@ while run: # main game loop
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             myBoard.showBoard()
-            if pygame.mouse.get_pressed() == (1,0,0):
+            mouseKey = pygame.mouse.get_pressed()
+            if mouseKey == (1,0,0):
                 print("right click")
 
                 if myBoard.checkTopCol(math.trunc(mousex/100)):
                     last_dc = myBoard.dropD(player, math.trunc(mousex/100))
                     player = switchP(player)
-                    
+
+                    if myBoard.checkall(last_dc) == 1:
+                        myBoard.resetBoard()
+        
+        
                 myBoard.showBoard()
                 
                 

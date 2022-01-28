@@ -53,7 +53,7 @@ class Board:
 
         return [row, col]
 
-    def checkall(self, last_d):
+    def checkall(self, last_d): #returns 1 if 4 in a row in all directions
 
         # last_d [0] = row of the last disc dropped
         # last_d[1] = collumn of the last disc dropped

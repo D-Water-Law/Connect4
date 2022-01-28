@@ -13,6 +13,7 @@ def genBoard(surface,board):
     squareSize = 100
     for row in range(rowCount):
         for col in range(colCount):
+            
             pygame.draw.rect(surface,BLUE,(col*squareSize,row*squareSize+squareSize,squareSize,squareSize))
             pygame.draw.circle(surface,BLACK,(col*squareSize+(squareSize/2),row*squareSize+squareSize+(squareSize/2)),40)
 
@@ -55,29 +56,25 @@ while run: # main game loop
     mousex, mousey = pygame.mouse.get_pos()
     drawTopC(DISPLAYSURF,mousex,player)    
     
-
+#### Event Handler #######
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             run = False
+
         if event.type == pygame.MOUSEBUTTONDOWN:
             myBoard.showBoard()
             if pygame.mouse.get_pressed() == (1,0,0):
                 print("right click")
+
+                if myBoard.checkTopCol(math.trunc(mousex/100)):
+                    last_dc = myBoard.dropD(player, math.trunc(mousex/100))
                 
-                
-                last_dc = myBoard.dropD(player, math.trunc(mousex/100))
+                    
                 myBoard.showBoard()
                 player = switchP(player)
-                ## continue from here
+                
 
 
-
-    
-    
-    activeKey = pygame.key.get_pressed()
-    if activeKey[pygame.K_ESCAPE]:
-        run = False 
-    ## put this in event handler section##
 
 
 
@@ -96,3 +93,13 @@ while run: # main game loop
     DISPLAYSURF.fill(BLACK)
 
 pygame.quit()
+
+
+
+
+
+################# Stuff ###############
+    # activeKey = pygame.key.get_pressed()
+    # if activeKey[pygame.K_ESCAPE]:
+    #     run = False 
+    ## put this in event handler section##

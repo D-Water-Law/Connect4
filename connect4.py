@@ -26,12 +26,20 @@ class Board:
                       [".", ".", ".", ".", ".", "."],
                       [".", ".", ".", ".", ".", "."],
                       [".", ".", ".", ".", ".", "."]]
+ # Check if column is not full   
+    def checkTopCol(self,col):
+        if self.board[0][col] != ".":
+            print("Collumn full !! Select another collumn\n")
+            return False
+        else:
+            return True
+
+            
 
     def dropD(self, user, col):
         row = 5
         check = True
-        while self.board[0][col] != ".":
-            col = int(input("Collumn full !! Select another collumn\n"))
+            
 
         while check:
             if self.board[row][col] == ".":

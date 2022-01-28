@@ -1,3 +1,9 @@
+######### Controls #########
+# Space = reset
+# Right Click = Place disc
+# Esc = Close window
+
+
 import pygame
 import math
 from connect4 import Board
@@ -83,6 +89,9 @@ while run: # main game loop
                     if myBoard.checkall(last_dc) == 1:
                         myBoard.resetBoard()
         
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                myBoard.resetBoard()
         
                 myBoard.showBoard()
                 

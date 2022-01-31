@@ -8,10 +8,14 @@ class Board:
             [".", ".", ".", ".", ".", "."],
             [".", ".", ".", ".", ".", "."]
         ]
+        self.score = [0,0]
 
     def getBoard(self):
         return self.board
-        
+    
+    def getScore(self):
+        return self.score
+
     def showBoard(self):
         print("  0 1 2 3 4 5")
         num = -1

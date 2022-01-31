@@ -4,8 +4,7 @@
 # Esc = Close window
 
 
-import pygame
-import math
+import pygame, math, time
 from connect4 import Board
 
 
@@ -40,6 +39,14 @@ def drawTopC(surface,x,user):
 
     pygame.draw.circle(surface,colour,(x,50),40)
 
+def showScore(surface,score):
+    font = pygame.font.SysFont("Arial, Times New Roman",20)
+    text1 = font.render("Yellow: "+str(score[0]), True, WHITE)
+    text2 = font.render("Red: "+str(score[1]),True, WHITE)
+    surface.blit(text1, (5,5))
+    surface.blit(text2, (515,5))
+
+
 def switchP(p):
     if p == 1:
         p += 1
@@ -66,10 +73,11 @@ run = True
 
 myBoard = Board()
 player = 1
+scores = myBoard.getScore()
 
 while run: # main game loop
     mousex, mousey = pygame.mouse.get_pos()
-    drawTopC(DISPLAYSURF,mousex,player)    
+      
     
 #### Event Handler #######
     for event in pygame.event.get():
@@ -84,10 +92,12 @@ while run: # main game loop
 
                 if myBoard.checkTopCol(math.trunc(mousex/100)):
                     last_dc = myBoard.dropD(player, math.trunc(mousex/100))
-                    player = switchP(player)
+                    
 
                     if myBoard.checkall(last_dc) == 1:
+                        scores[player-1] += 1
                         myBoard.resetBoard()
+                        player = switchP(player)
         
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
@@ -99,21 +109,15 @@ while run: # main game loop
 
 
 
-
-
-    genBoard(DISPLAYSURF,myBoard.getBoard())
-    
-
-
-
-    
-    
-    
-
-    
-    
-    pygame.display.update()  
     DISPLAYSURF.fill(BLACK)
+    
+    
+    drawTopC(DISPLAYSURF,mousex,player)  
+    genBoard(DISPLAYSURF,myBoard.getBoard())
+    showScore(DISPLAYSURF,scores)
+
+    pygame.display.update()  
+    
 
 pygame.quit()
 

@@ -46,6 +46,16 @@ def showScore(surface,score):
     surface.blit(text1, (5,5))
     surface.blit(text2, (515,5))
 
+def youWin(surface,user):
+    if user == 1:
+        player = "Yellow"
+    else:
+        player = "Red"
+    
+    font = pygame.font.SysFont("Arial, Times New Roman",50)
+    text = font.render(player + " Win !!!!", True, WHITE)
+    surface.blit(text, (200,30)) 
+
 
 def switchP(p):
     if p == 1:
@@ -96,8 +106,14 @@ while run: # main game loop
 
                     if myBoard.checkall(last_dc) == 1:
                         scores[player-1] += 1
+                        youWin(DISPLAYSURF,player)
+                        genBoard(DISPLAYSURF,myBoard.getBoard())
+                        pygame.display.update()
+                        time.sleep(3)
+
                         myBoard.resetBoard()
-                        player = switchP(player)
+                
+                player = switchP(player)        
         
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:

@@ -79,6 +79,8 @@ win_height = 700
 win_width = 600 
 DISPLAYSURF = pygame.display.set_mode((win_width, win_height))
 pygame.display.set_caption('Connect 4')
+clock = pygame.time.Clock()
+FPS = 60
 run = True
 
 myBoard = Board()
@@ -133,6 +135,8 @@ while run: # main game loop
     showScore(DISPLAYSURF,scores)
 
     pygame.display.update()  
+    clock.tick(FPS)
+    
     
 
 pygame.quit()
